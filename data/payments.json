@@ -1,0 +1,20 @@
+[
+  {
+    "transaction_id": "txn_1757927108_1",
+    "user": "alice",
+    "amount": 100.5,
+    "method": "upi",
+    "account_id": "acct_demo",
+    "ts": 1757927108.2792697,
+    "date_ist": "2025-09-15"
+  },
+  {
+    "transaction_id": "txn_1757927108_2",
+    "user": "bob",
+    "amount": 200.0,
+    "method": "credit_card",
+    "account_id": "acct_demo",
+    "ts": 1757927108.2980843,
+    "date_ist": "2025-09-15"
+  }
+]
