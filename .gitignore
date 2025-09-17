@@ -1,0 +1,32 @@
+# --- Python cache & bytecode ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# --- Virtual environments ---
+.venv/
+env/
+*.env
+
+# --- Test & coverage artifacts ---
+.pytest_cache/
+results.xml
+.coverage
+htmlcov/
+
+# --- Local runtime data ---
+data/
+app/data/
+!data/.gitkeep
+!app/data/.gitkeep
+
+# --- Logs ---
+*.log
+
+# --- IDE / OS files ---
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
