@@ -1,0 +1,82 @@
+pipeline {
+  agent any
+
+  environment {
+    IMAGE_NAME = "payment-service"
+    IMAGE_TAG  = "build-${env.BUILD_NUMBER}"
+    CONTAINER  = "payment-service"
+    HOST_PORT  = "8081"
+    APP_PORT   = "8000"
+  }
+
+  options {
+    timestamps()
+    ansiColor('xterm')
+  }
+
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+
+    stage('Build Docker image') {
+      steps {
+        sh '''
+          set -e
+          docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest .
+          docker images | head -n 10
+        '''
+      }
+    }
+
+    stage('Deploy container') {
+      steps {
+        sh '''
+          set -e
+          if [ "$(docker ps -q -f name=^/${CONTAINER}$)" ]; then
+            docker stop ${CONTAINER}
+          fi
+          if [ "$(docker ps -aq -f name=^/${CONTAINER}$)" ]; then
+            docker rm ${CONTAINER}
+          fi
+
+          docker run -d --restart unless-stopped \
+            --name ${CONTAINER} \
+            -p ${HOST_PORT}:${APP_PORT} \
+            ${IMAGE_NAME}:${IMAGE_TAG}
+
+          echo "Waiting for app to start..."
+          sleep 3
+        '''
+      }
+    }
+
+    stage('Smoke test /health') {
+      steps {
+        sh '''
+          set -e
+          for i in $(seq 1 10); do
+            if curl -fsS http://localhost:${HOST_PORT}/health | grep -q '"status"'; then
+              echo "Healthcheck OK"
+              exit 0
+            fi
+            echo "Waiting for health endpoint... ($i/10)"
+            sleep 2
+          done
+          echo "Healthcheck FAILED"
+          exit 1
+        '''
+      }
+    }
+  }
+
+  post {
+    success {
+      sh 'echo "Deployed ${IMAGE_NAME}:${IMAGE_TAG} on port ${HOST_PORT}" > deploy-info.txt'
+      archiveArtifacts artifacts: 'deploy-info.txt', onlyIfSuccessful: true
+    }
+    always {
+      sh 'docker ps --format "table {{.ID}}\\t{{.Image}}\\t{{.Status}}\\t{{.Ports}}\\t{{.Names}}" || true'
+    }
+  }
+}
