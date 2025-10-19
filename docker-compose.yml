@@ -1,0 +1,20 @@
+#docker compose_file
+#
+version: "3.8"
+
+services:
+  payment-service:
+    build: .
+    image: payment-service:dev
+    container_name: payment-service
+    ports:
+      - "80:8000"
+    volumes:
+      - payment_data:/data
+    restart: unless-stopped
+
+volumes:
+  payment_data:
+
+
+
