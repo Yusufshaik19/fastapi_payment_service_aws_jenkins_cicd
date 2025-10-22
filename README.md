@@ -127,5 +127,12 @@ Condition: > 80% for 5 minutes
 <img width="1366" height="720" alt="Screenshot 2025-10-21 194413" src="https://github.com/user-attachments/assets/07cb889e-c598-4621-a673-de2ee6f4b51a" />
 <img width="1366" height="720" alt="Screenshot 2025-10-21 194707" src="https://github.com/user-attachments/assets/e11bbe2d-5063-46c3-bd75-bc5c82f5cbd9" />
 
+## Author
+**Yusuf Shaik**  
+DevOps Engineer | AWS | Jenkins | Docker | Python  
+
+ **skyusuf@gmail.com**  
+ [LinkedIn](https://linkedin.com/in/yusufshaik19)  
+[GitHub](https://github.com/Yusufshaik19)
 
 
