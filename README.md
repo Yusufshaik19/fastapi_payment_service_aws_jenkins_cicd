@@ -96,7 +96,7 @@ we can prevent broken containers from going live.
 commited jenkins file from ec2 to github
 <img width="1366" height="720" alt="Screenshot 2025-10-19 183038" src="https://github.com/user-attachments/assets/9cea9319-0030-48f9-bf12-30b7f36632dd" />
 configured jenkins thorugh elastic ip 
-<img width="960" height="504" alt="jenkins port config" src="https://github.com/user-attachments/assets/fc1ef629-7bf5-438a-8aee-023471be2d3d" />
+
 
 #adding jnekins as a groupuser
 <img width="1920" height="1008" alt="jenkins script console verfifcation " src="https://github.com/user-attachments/assets/293bf8ec-897e-42b1-a35b-4e1993b96d8c" />
